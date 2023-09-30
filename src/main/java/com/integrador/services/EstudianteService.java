@@ -20,20 +20,28 @@ import com.integrador.services.dto.estudiante.EstudianteResponseDto;
 import com.integrador.services.exception.NotFoundException;
 
 import jakarta.transaction.Transactional;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@NoArgsConstructor
 public class EstudianteService{
-	  private EstudianteRepository estudianteRepository;
-
-	  @Transactional
+	 
+	  
+	 @Autowired 
+	 private  EstudianteRepository estudianteRepository;
+	
+/*	@Transactional
 	    public EstudianteResponseDto save(EstudianteRequestDto request ){
-	        final var estudiante = new Estudiante(request);
-	        final var result = this.estudianteRepository.save(estudiante);
-	        return new EstudianteResponseDto(result.getEstudianteId(), result.getDni(), result.getNombre(), result.getApellido(),
+	        Estudiante estudiante = new Estudiante(request);
+	        Estudiante result = this.estudianteRepository.save(estudiante);
+	        return new EstudianteResponseDto(estudiante, result.getEstudianteId(), result.getDni(), result.getNombre(), result.getApellido(),
 	        		result.getEdad(), result.getGenero(), result.getCiudadResidencia(), result.getLU(), result.getCarreras());
-	    }
+	    }*/
+	    
+	    
+	  
 
 	    @Transactional
 	    public List<EstudianteResponseDto> findAll(){
@@ -46,12 +54,28 @@ public class EstudianteService{
 	                .map( EstudianteResponseDto::new )
 	                .orElseThrow( () -> new NotFoundException("Estudiante", id ) );
 	    }
+	    
+	  /*  @Transactional
+	    public EstudianteResponseDto findByLibreta( int LU ){
+	        return this.estudianteRepository.findByLibreta( LU )
+	                .map( EstudianteResponseDto::new )
+	                .orElseThrow( () -> new NotFoundException("Estudiante", LU ) );
+	    }*/
+	    
 
 	    @Transactional
-	    public List<EstudianteResponseDto> search(EstudianteRequestDto request ){
-	        return this.estudianteRepository.findByByApellido( request.getApellido() )
+	    public List<EstudianteResponseDto> estudiantesPorApellido ( ){
+	        return this.estudianteRepository.estudiantesPorApellido()
 	                .stream().map( EstudianteResponseDto::new ).toList();
 	    }
+	    
+	   
+	    @Transactional
+	    public List<EstudianteResponseDto> search( EstudianteRequestDto request ){
+	        return this.estudianteRepository.findByGenero( request.getGenero() )
+	                .stream().map( EstudianteResponseDto::new ).toList();
+	    }
+	    
 
 	}
 

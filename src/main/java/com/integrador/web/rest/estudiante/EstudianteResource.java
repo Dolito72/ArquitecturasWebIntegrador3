@@ -2,6 +2,7 @@ package com.integrador.web.rest.estudiante;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("api/estudiantes")
 @RequiredArgsConstructor
 public class EstudianteResource {
+	@Autowired
 	private  EstudianteService estudianteService;
 
     @GetMapping("")
@@ -33,10 +35,25 @@ public class EstudianteResource {
         return this.estudianteService.findById( id );
     }
 
+    /*@GetMapping("/{LU}")
+    public EstudianteResponseDto findByLibreta( @PathVariable int LU ){
+        return this.estudianteService.findByLibreta( LU );
+    }*/
+
+    
+    
+    @GetMapping("/OrdenadosPorApellido")
+    public List<EstudianteResponseDto> estudiantesPorApellido( EstudianteRequestDto request ){
+        return this.estudianteService.estudiantesPorApellido( );
+    }
+    
     @GetMapping("/search")
-    public List<EstudianteResponseDto> findById( EstudianteRequestDto request ){
+    public List<EstudianteResponseDto> findByGenero( EstudianteRequestDto request ){
         return this.estudianteService.search( request );
     }
+  
+    
+    
 
  /*   @PostMapping("")
     public ResponseEntity<EstudianteResponseDto> save( @RequestBody @Validated EstudianteRequestDto request ){

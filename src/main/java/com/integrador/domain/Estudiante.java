@@ -46,6 +46,9 @@ public class Estudiante {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "estudiante")
 	private Set<EstudianteCarrera> carreras;
 	
+	public Estudiante() {
+		
+	}
 	public Estudiante(EstudianteRequestDto request) {
 		this.nombre = request.getNombre();
 		this.apellido = request.getApellido();
@@ -54,7 +57,7 @@ public class Estudiante {
 		this.dni = request.getDni();
 		this.ciudadResidencia = request.getCiudadResidencia();
 		this.LU = request.getLU();
-		this.carreras = new HashSet<EstudianteCarrera>();
+		/*this.carreras = new HashSet<EstudianteCarrera>();*/
 	}
 
 	
