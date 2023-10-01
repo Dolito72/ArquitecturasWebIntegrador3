@@ -9,7 +9,9 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 import com.integrador.domain.Estudiante;
@@ -55,12 +57,23 @@ public class EstudianteService{
 	                .orElseThrow( () -> new NotFoundException("Estudiante", id ) );
 	    }
 	    
-	  /*  @Transactional
-	    public EstudianteResponseDto findByLibreta( int LU ){
-	        return this.estudianteRepository.findByLibreta( LU )
-	                .map( EstudianteResponseDto::new )
-	                .orElseThrow( () -> new NotFoundException("Estudiante", LU ) );
+	   /* @Transactional
+	    public EstudianteResponseDto estudiantePorLibreta1( int LU ){
+	        return this.estudianteRepository.estudiantePorLibreta(LU)
+	                stream.map( EstudianteResponseDto::new )
+	                .orElseThrow( () -> new NotFoundException(LU ) );
+	    }
+	    
+	    @Transactional
+	    public Optional<EstudianteResponseDto> estudiantePorLibreta(int LU)throws Exception{
+	    	var resultado = estudianteRepository.estudiantePorLibreta(LU);
+	        try{
+	            return (resultado).map(EstudianteResponseDto::new);
+	        }catch (Exception e){
+	            throw new Exception(e.getMessage());
+	        }
 	    }*/
+	    
 	    
 
 	    @Transactional
@@ -71,8 +84,8 @@ public class EstudianteService{
 	    
 	   
 	    @Transactional
-	    public List<EstudianteResponseDto> search( EstudianteRequestDto request ){
-	        return this.estudianteRepository.findByGenero( request.getGenero() )
+	    public List<EstudianteResponseDto> estudiantePorGenero(String genero ){
+	        return this.estudianteRepository.findByGenero(genero )
 	                .stream().map( EstudianteResponseDto::new ).toList();
 	    }
 	    

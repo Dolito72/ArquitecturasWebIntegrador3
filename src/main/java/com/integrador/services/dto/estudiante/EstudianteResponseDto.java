@@ -1,6 +1,7 @@
 package com.integrador.services.dto.estudiante;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -26,6 +27,7 @@ public class EstudianteResponseDto {
 	private final String ciudadResidencia;
 	private final int LU;
 /*	private final Set<EstudianteCarrera> carreras;*/
+	public Object stream;
 	
 	
     
@@ -40,6 +42,9 @@ public class EstudianteResponseDto {
         this.LU = e.getLU();
        /* this.carreras = new HashSet<EstudianteCarrera>();*/
 	}
+
+
+
 
 
 

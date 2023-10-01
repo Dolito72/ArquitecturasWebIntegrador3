@@ -35,7 +35,7 @@ public class EstudianteResource {
         return this.estudianteService.findById( id );
     }
 
-    /*@GetMapping("/{LU}")
+/*    @GetMapping("/LU")
     public EstudianteResponseDto findByLibreta( @PathVariable int LU ){
         return this.estudianteService.findByLibreta( LU );
     }*/
@@ -47,9 +47,11 @@ public class EstudianteResource {
         return this.estudianteService.estudiantesPorApellido( );
     }
     
-    @GetMapping("/search")
-    public List<EstudianteResponseDto> findByGenero( EstudianteRequestDto request ){
-        return this.estudianteService.search( request );
+   
+    
+    @GetMapping("/genero/{genero}")
+    public List<EstudianteResponseDto> findByGenero( @PathVariable String genero ){
+        return this.estudianteService.estudiantePorGenero(genero );
     }
   
     

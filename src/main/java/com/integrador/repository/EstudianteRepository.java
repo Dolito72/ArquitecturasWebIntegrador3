@@ -18,7 +18,7 @@ public interface EstudianteRepository extends JpaRepository<Estudiante, Integer>
 
 
 	@Query ("SELECT e FROM Estudiante e WHERE e.LU = :LU")
-		Estudiante findByLibreta(int LU);
+		EstudianteResponseDto estudiantePorLibreta(int LU);
 	
 	@Query ("SELECT e FROM Estudiante e WHERE e.genero = :genero")
 		List<Estudiante> findByGenero(String genero);
